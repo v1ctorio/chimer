@@ -86,9 +86,10 @@ include(FetchContent)
 FetchContent_Declare(
         libwebsockets
         GIT_REPOSITORY https://github.com/warmcat/libwebsockets.git
-        GIT_TAG        v4.3-stable
+        GIT_TAG        v4.5-stable
 )
 
+set(DISABLE_WERROR ON CACHE BOOL "Avoid treating compiler warnings as fatal errors" FORCE)
 set(LWS_CTEST_INTERNET_AVAILABLE OFF CACHE BOOL "enable tests for proto" FORCE)
 set(LWS_WITHOUT_TESTAPPS ON CACHE BOOL "Don't build the libwebsocket-test-apps" FORCE)
 set(LWS_WITHOUT_TEST_SERVER ON CACHE BOOL "Don't build the libwebsocket-test-apps" FORCE)
