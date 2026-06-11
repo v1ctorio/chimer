@@ -1,3 +1,3 @@
 [workspace]
 resolver = "3"
-members = ["chime_sdk_rs"]
+members = ["chime_sdk_rs", "chimer"]

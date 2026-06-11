@@ -4,7 +4,7 @@ fn main() {
     let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let chime_sdk_dir = format!("{}/../thirdparty/chime-sdk-signaling-cpp", manifest_dir);
     
-    cxx_build::bridge("src/main.rs")
+    cxx_build::bridge("src/lib.rs")
         .file("src/chime_bridge.cc")
         .std("c++17")
         .include("src/include")
