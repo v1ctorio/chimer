@@ -14,7 +14,7 @@ fn main() {
         "join_token".into(),
         );
 
-    println!("Credentials pointer = {}", credentials);
+    println!("Credentials pointer = {:p}", credentials.as_ptr());
 }
 
 #[cxx::bridge]
@@ -28,7 +28,7 @@ mod ffi {
     }
     
 
-
+    #[namespace = "chime_bridge"]
     unsafe extern "C++" {
         // include!(<thirdparty/chime-sdk-signaling-cpp/src/signaling/default_signaling_client_factory.h>);
         include!(<chime-bridge.h>);
@@ -43,14 +43,15 @@ mod ffi {
         // type MeetingSessionConfiguration;
         // type SignalingClientConfiguration;
         // type DefaultSignalingDependencies;
+        fn make_session_credentials(attendee_id: String, external_user_id: String, join_token: String) -> UniquePtr<MeetingSessionCredentials>;
 
     }
 
+    #[namespace = "chime"]
     unsafe extern "C++" {
         include!(<chime-bridge.h>);
 
         type MeetingSessionCredentials;
-        fn make_session_credentials(attendee_id: String, external_user_id: String, join_token: String) -> UniquePtr<MeetingSessionCredentials>;
 
     }
 }
