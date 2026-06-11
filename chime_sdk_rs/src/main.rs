@@ -31,7 +31,7 @@ mod ffi {
     #[namespace = "chime_bridge"]
     unsafe extern "C++" {
         // include!(<thirdparty/chime-sdk-signaling-cpp/src/signaling/default_signaling_client_factory.h>);
-        include!(<chime-bridge.h>);
+        include!(<chime_bridge.h>);
 
         fn hello_gang() -> UniquePtr<CxxString>;
         fn do_struct(x: SomeStruct) -> i8;
@@ -49,7 +49,7 @@ mod ffi {
 
     #[namespace = "chime"]
     unsafe extern "C++" {
-        include!(<chime-bridge.h>);
+        include!(<chime_bridge.h>);
 
         type MeetingSessionCredentials;
 

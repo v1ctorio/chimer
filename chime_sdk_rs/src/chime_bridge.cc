@@ -2,7 +2,7 @@
 #include <memory>
 #include <functional>
 #include <rust/cxx.h>
-#include <chimer/src/main.rs.h>
+#include <chime-sdk-rs/src/main.rs.h>
 #include "signaling/default_signaling_client_factory.h"
 // struct SomeStruct{
 //     rust::string foo;

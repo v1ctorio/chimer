@@ -4,7 +4,7 @@
 #include <rust/cxx.h>
 #include "signaling/default_signaling_client_factory.h"
 #include "session/meeting_session_credentials.h"
-#include <chimer/src/main.rs.h>
+#include <chime-sdk-rs/src/main.rs.h>
 
 // struct SomeStruct{
 //     rust::String foo;

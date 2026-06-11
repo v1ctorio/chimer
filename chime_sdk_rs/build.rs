@@ -1,16 +1,19 @@
+use std::env;
 
 fn main() {
-    let chime_sdk_dir = "thirdparty/chime-sdk-signaling-cpp";
+    let manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    let chime_sdk_dir = format!("{}/../thirdparty/chime-sdk-signaling-cpp", manifest_dir);
     
     cxx_build::bridge("src/main.rs")
-        .file("src/chime-bridge.cc")
+        .file("src/chime_bridge.cc")
         .std("c++17")
         .include("src/include")
         .include(format!("{}/src", chime_sdk_dir))
         .include(format!("{}/build/src/proto", chime_sdk_dir))
         .include(format!("{}/build/src", chime_sdk_dir))
         .include(format!("{}/build/_deps/protobuf-src/src", chime_sdk_dir))
-        .compile("chimer-dev");
+        .compile("chime-sdk-rs");
+
 
         
     println!("cargo:rustc-link-search=native={}/build", chime_sdk_dir);
@@ -18,8 +21,8 @@ fn main() {
     println!("cargo:rustc-link-search=native={}/build/_deps/libwebsockets-build/lib", chime_sdk_dir);
     println!("cargo:rustc-link-search=native={}/build/_deps/protobuf-build", chime_sdk_dir);
 
-    println!("cargo:rerun-if-changed=src/chime-bridge.cc");
-    println!("cargo:rerun-if-changed=include/chime-bridge.h");
+    println!("cargo:rerun-if-changed=src/chime_bridge.cc");
+    println!("cargo:rerun-if-changed=include/chime_bridge.h");
     println!("cargo:rustc-link-lib=static=amazon-chime-signaling-sdk-cpp");
     println!("cargo:rustc-link-lib=static=websockets");
     println!("cargo:rustc-link-lib=static=protobufd");
