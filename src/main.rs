@@ -1,4 +1,4 @@
-use crate::ffi::{SomeStruct, do_struct, hello_gang};
+use crate::ffi::{SomeStruct, do_struct, hello_gang, make_session_credentials};
 
 fn main() {
     println!("Hello, world!");
@@ -6,7 +6,15 @@ fn main() {
     println!("{:?}", ret);
     let something = SomeStruct {bar: 69, foo: "quecosa".into() };
     let ret = do_struct(something);
-    println!("{:?}", ret)
+    println!("{:?}", ret);
+
+    let credentials = make_session_credentials(
+        "what".into(),
+        "external_user_id".into(),
+        "join_token".into(),
+        );
+
+    println!("Credentials pointer = {}", credentials);
 }
 
 #[cxx::bridge]
@@ -18,7 +26,7 @@ mod ffi {
         foo: String,
         bar: i8,
     }
-
+    
 
 
     unsafe extern "C++" {
@@ -35,6 +43,14 @@ mod ffi {
         // type MeetingSessionConfiguration;
         // type SignalingClientConfiguration;
         // type DefaultSignalingDependencies;
+
+    }
+
+    unsafe extern "C++" {
+        include!(<chime-bridge.h>);
+
+        type MeetingSessionCredentials;
+        fn make_session_credentials(attendee_id: String, external_user_id: String, join_token: String) -> UniquePtr<MeetingSessionCredentials>;
 
     }
 }
