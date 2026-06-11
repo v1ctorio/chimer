@@ -1,12 +1,23 @@
+use crate::ffi::{SomeStruct, do_struct, hello_gang};
+
 fn main() {
     println!("Hello, world!");
     let ret = ffi::hello_gang();
     println!("{:?}", ret);
+    let something = SomeStruct {bar: 69, foo: "quecosa".into() };
+    let ret = do_struct(something);
+    println!("{:?}", ret)
 }
 
 #[cxx::bridge]
 mod ffi {
 
+
+
+    struct SomeStruct{
+        foo: String,
+        bar: i8,
+    }
 
 
 
@@ -15,7 +26,7 @@ mod ffi {
         include!(<chime-bridge.h>);
 
         fn hello_gang() -> UniquePtr<CxxString>;
-
+        fn do_struct(x: SomeStruct) -> i8;
         // type SingalingClient;
         // fn CreateSignalingClient()->UniquePtr<SignalingClient>;
 // 

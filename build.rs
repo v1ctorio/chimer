@@ -1,14 +1,15 @@
 
 fn main() {
-    let chime_sdk_dir = "thirdparty/chime-sdk-signaling-cpp";
     
-    cxx_build::bridge("src/main.rs") // returns a cc::Build
+    
+    cxx_build::bridge("src/main.rs")
         .file("src/chime-bridge.cc")
         .std("c++17")
         .include("src/include")
         .compile("chimer-dev");
 
-
+        
+    let chime_sdk_dir = "thirdparty/chime-sdk-signaling-cpp";
     println!("cargo:rustc-link-search=native={}/build", chime_sdk_dir);
     println!("cargo:rustc-link-search=native={}/build/src", chime_sdk_dir);
     println!("cargo:rustc-link-search=native={}/build/_deps/libwebsockets-build/lib", chime_sdk_dir);
