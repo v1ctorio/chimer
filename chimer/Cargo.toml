@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-chime-sdk-rs = { path = "../chime_sdk_rs"}
+chime-sdk-rs = { path = "../chime-sdk-rs"}
